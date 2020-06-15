@@ -17,14 +17,17 @@ public class LongestCommonPrefix {
     public static void main(String[] args) {
         LongestCommonPrefix longestCommonPrefix = new LongestCommonPrefix();
         String[] strs = {"flower", "flow", "flight"};
-        System.out.println("t: fl, my:" + longestCommonPrefix.myLongestCommonPrefix(strs));
+        System.out.println("t: fl, my:" + longestCommonPrefix.longestCommonPrefix(strs));
         String[] strs2 = {};
-        System.out.println("t: , my:" + longestCommonPrefix.myLongestCommonPrefix(strs2));
+        System.out.println("t: , my:" + longestCommonPrefix.longestCommonPrefix(strs2));
+
+        String[] strs3 = {"aa", "a"};
+        System.out.println("t:a , my:" + longestCommonPrefix.longestCommonPrefix(strs3));
     }
 
     // 暴力解法， 对每个字符串 从 下标 0 开始往后判断， 不一致或者 StringIndexOutOfBoundsException 时，即可得到最长子串。
     public String myLongestCommonPrefix(String[] strs) {
-        if (strs.length == 0){
+        if (strs.length == 0) {
             return "";
         }
         char temp = ' ';
@@ -53,5 +56,23 @@ public class LongestCommonPrefix {
             sb.append(temp);
         }
         return sb.toString();
+    }
+
+
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length == 0) return "";
+        String prefix = strs[0];
+        for (int i = 0; i < strs.length; i++) {
+            if(i == 0) continue;
+            prefix = prefix.substring(0, Math.min(prefix.length(), strs[i].length()));
+
+            //Math.min(prefix.length(), strs[i].length())   这里要实时的获取，因为循环会改变 prefix 的长度
+            for (int j = 0; j < Math.min(prefix.length(), strs[i].length()); j++) {
+                if(prefix.charAt(j)!= strs[i].charAt(j)){
+                    prefix = prefix.substring(0, j);
+                }
+            }
+        }
+        return prefix;
     }
 }
