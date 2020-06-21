@@ -31,6 +31,7 @@ public class IsSymmetric {
         if (l == null && r == null) return true;
         if (l == null || r == null) return false;
         boolean s =  compare(l.left, r.right) && compare(l.right, r.left);
+        // 这里先去递归子节点去了， 比较耗时， 可以先判断 l.val == r.val 如果为 false 直接 return false
         return l.val == r.val && s;
     }
 }
