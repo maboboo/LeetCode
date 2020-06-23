@@ -15,7 +15,7 @@ public class IsSameTree {
         if (p.val != q.val){
             return false;
         }else {
-            return myIsSameTree(p.left, q.left) && myIsSameTree(p.right, q.right);
+            return myIsSameTree(p.left, q.right) && myIsSameTree(p.right, q.left);
         }
     }
 
